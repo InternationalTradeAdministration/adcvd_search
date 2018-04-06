@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Market Intelligence Search App</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400&subset=latin,latin-ext">
+
+    <style type="text/css">
+     body {
+       font-family: 'Lato', san-serif;
+       padding-top: 4em;
+       text-align: center;
+     }
+     header {
+       font-size: 45px;
+       margin: 0 auto;
+       width: 530px;
+     }
+     .wrapper {
+       margin: 20px auto;
+       text-align: center;
+       width: 500px;
+     }
+     table {
+       width: 100%;
+       text-align: left;
+     }
+     td {
+       padding: 10px 0;
+     }
+    </style>
+  </head>
+  <body>
+    <header>Market Intelligence Search</header>
+    <div class="wrapper">
+      <table>
+        <tbody>
+          <tr>
+            <td>Market Intelligence</td>
+            <td><a class="staging" href="market_intelligence/staging">Staging</a></td>
+            <td><a class="production" href="market_intelligence/production">Production</a></td>
+          </tr>
+          <tr>
+            <td>TPP Rates</td>
+            <td>Staging
+              <!--
+              <a class="production" href="tpp_rates/staging">Staging</a>
+              -->
+            </td>
+            <td><a class="production" href="tpp_rates/production">Production</a></td>
+          </tr>
+          <tr>
+            <td>Stop Fakes</td>
+            <td><a class="staging" href="stop_fakes/staging">Staging</a></td>
+            <td>
+              Production
+              <!--
+              <a class="production" href="market_intelligence/production">Production</a>
+              -->
+            </td>
+          </tr>
+          <tr>
+            <td>ADCVD Orders</td>
+            <td><a class="staging" href="adcvd/staging">Staging</a></td>
+            <td>
+              <a class="production" href="adcvd/production">Production</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
