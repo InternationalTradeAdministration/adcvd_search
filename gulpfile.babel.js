@@ -20,7 +20,7 @@ function build(site, stage) {
     .pipe(gulp.dest(config.output.path));
 }
 
-const sites = ['market_intelligence', 'tpp_rates', 'stop_fakes', 'adcvd'];
+const sites = ['adcvd'];
 const stages = ['staging', 'production'];
 sites.forEach(site => {
   stages.forEach(stage => {

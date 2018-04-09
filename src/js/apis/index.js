@@ -8,7 +8,6 @@ const implicit = {
 
 export const allAPIs = assign(
   {},
-  require('./articles'),
   require('./trades')
 );
 
