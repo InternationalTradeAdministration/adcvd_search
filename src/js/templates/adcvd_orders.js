@@ -75,13 +75,5 @@ class ADCVDOrder extends React.Component {
 export const adcvd_orders = {
   ResultItem: (props, options = {}) => (
     <ADCVDOrder { ...props } showSegments={ options.showSegments } />
-  ),
-  CardItem: ({ country, product_short_name, case_number }) => (
-    <article className="mi-adcvd-orders mi-card__item">
-      <header>
-        { country + ":  " + product_short_name }
-      </header>
-      <p dangerouslySetInnerHTML={ { __html: case_number } }></p>
-    </article>
   )
 };

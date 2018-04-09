@@ -1,7 +1,6 @@
 import { filter, isEmpty, reduce } from 'lodash';
 import React, { PropTypes } from 'react';
 
-import Deck from './deck';
 import Result from './result';
 import NoResult from './no_result';
 import Spinner from '../../components/spinner';
@@ -24,8 +23,6 @@ function contentType({ results, apis }) {
 
   if (matchedAPIs.length === 0) return { type: 'noResult' };
 
-  if (apis.length > 1 && matchedAPIs.length > 1) return { type: 'deck', matchedAPIs };
-
   return { type: 'result', matchedAPIs };
 }
 
@@ -34,17 +31,6 @@ const Content = ({ findTemplate, onPaging, onSelect, query, results, selectedAPI
   const apis = filter(selectedAPIs, api => api.result.enable);
   const { type, matchedAPIs } = contentType({ results, apis });
   switch (type) {
-  case 'deck':
-    content = (
-      <Deck
-        apis={ matchedAPIs }
-        findTemplate={ findTemplate }
-        onClick={ onSelect }
-        results={ results }
-      />
-    );
-    break;
-
   case 'result':
     content = (
       <Result

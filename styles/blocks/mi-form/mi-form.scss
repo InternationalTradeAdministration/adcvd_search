@@ -6,6 +6,10 @@
   width: 96%;
   max-width: 640px;
 
+  label {
+    color: black;
+  }
+
   &__search-row {
     display: table;
     margin: 0 auto;
@@ -67,13 +71,15 @@
       max-height: 150px;
       list-style-type: none;
       padding: 2px;
+      background-color: white;
+      font-size: 14px;
 
       li {
         padding: 2px;
       }
 
       li:hover {
-        background-color: white;
+        background-color: #f5fbfe;
       }
     }
   }

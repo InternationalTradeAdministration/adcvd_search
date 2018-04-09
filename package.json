@@ -1,18 +1,18 @@
 {
-  "name": "market-intelligence-search-app",
-  "version": "1.0.1",
-  "description": "Search Market Intelligence",
+  "name": "adcvd_search",
+  "version": "1.0.0",
+  "description": "Search app for AD/CVD case data.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/GovWizely/market-intelligence-search-app.git"
+    "url": "git+ssh://git@github.com/GovWizely/adcvd_search.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GovWizely/market-intelligence-search-app/issues"
+    "url": "https://github.com/GovWizely/adcvd_search/issues"
   },
-  "homepage": "https://github.com/GovWizely/market-intelligence-search-app#readme",
+  "homepage": "https://github.com/GovWizely/adcvd_search#readme",
   "dependencies": {
     "babel-preset-stage-0": "^6.5.0",
     "deepmerge": "^0.2.10",

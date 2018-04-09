@@ -4,7 +4,6 @@ export const TEMPLATES = assign(
   {},
   require('./defaults'),
   require('./adcvd_orders'),
-  require('./articles'),
 );
 
 export function findTemplate(templateName) {

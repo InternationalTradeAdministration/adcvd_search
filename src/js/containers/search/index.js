@@ -11,7 +11,6 @@ import { updatePath } from '../../actions/path';
 import { clearFiltering, updateFiltering, updateQuery, replaceQuery } from '../../actions/query';
 import { fetchTypeaheadsByAPI, invalidateAllTypeaheads } from '../../actions/typeaheads';
 
-import BucketList from './bucket_list';
 import Content from './content';
 import Filter from './filter';
 import Form from './form';
@@ -26,7 +25,7 @@ class Index extends React.Component {
   }
   render() {
     const {
-      enabledAPIs, filters, onBucket, onClearFilter, onExpand, onFilter,
+      enabledAPIs, filters, onClearFilter, onExpand, onFilter,
       onPaging, onSelect, onSubmit, query, results, selectedAPIs, typeaheads
     } = this.props;
 
@@ -38,10 +37,6 @@ class Index extends React.Component {
             <QueryExpansionList onClick={ onExpand } queryExpansions={ results.query_expansion } />
             <QueryPrompt query={ query } selectedAPIs={ selectedAPIs } />
           </div>
-        </div>
-
-        <div className="mi-search__bucket-list-container">
-          <BucketList apis={ enabledAPIs } onClick={ onBucket } selectedAPIs={ selectedAPIs } />
         </div>
 
         <div className="mi-search__main-container">
@@ -69,7 +64,6 @@ Index.propTypes = {
   filters: PropTypes.object,
   location: PropTypes.object,
   notifications: PropTypes.array,
-  onBucket: PropTypes.func.isRequired,
   onClearFilter: PropTypes.func.isRequired,
   onExpand: PropTypes.func.isRequired,
   onFilter: PropTypes.func.isRequired,
@@ -105,13 +99,6 @@ function mapDispatchToProps(
   dispatch, { enabledAPIs, onSubmit, query: currentQuery }
 ) {
   return {
-    onBucket: (apis) => {
-      dispatch(selectAPIs(apis));
-      dispatch(updateQuery({ offset: 0 }));
-      dispatch(invalidateAllFilters());
-      dispatch(fetchResultsByAPI());
-      dispatch(updatePath());
-    },
     onClearFilter: (e) => {
       e.preventDefault();
       dispatch(clearFiltering(e.target.dataset.filters));

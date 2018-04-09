@@ -1,6 +1,6 @@
-# Market Intelligence Search App
+# AD/CVD Search App
 
-This is a [React](https://facebook.github.io/react/)+[Redux](http://redux.js.org/) front-end JS app which provides a search UI to export.gov's Market Intelligence API.
+This is a [React](https://facebook.github.io/react/)+[Redux](http://redux.js.org/) front-end JS app which provides a search UI to export.gov's AD/CVD case data.
 
 ## Getting Started
 

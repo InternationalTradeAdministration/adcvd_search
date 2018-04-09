@@ -13,12 +13,12 @@ function renderToElement(elementId, options) {
   const history = syncHistoryWithStore(hashHistory, store);
 
   render(
-    <Root history={ history } store={ store } use_index_page={ options.use_index_page } />,
+    <Root history={ history } store={ store } />,
     document.getElementById(elementId)
   );
 }
 
 export default renderToElement;
-window.MarketIntelligenceSearchApp = {
+window.ADCVDSearch = {
   render: renderToElement
 };
