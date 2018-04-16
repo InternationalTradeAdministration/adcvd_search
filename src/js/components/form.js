@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { filter, isEmpty, reduce } from 'lodash';
-import { reduxForm } from 'redux-form';
+import { reduxForm, getValues } from 'redux-form';
 import Autosuggest from 'react-autosuggest';
-
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -24,27 +25,49 @@ const renderSuggestionsContainer = ({ containerProps , children, query }) => {
   )
 }
 
+const selectOptions = [
+  { value: 'countries', label: 'Country' },
+  { value: 'products', label: 'Product' },
+  { value: 'case_numbers', label: 'Case Number' },
+  { value: 'hts_numbers', label: 'HTS Number' },
+]
+
+const SelectField = ({field, onChange}) => {
+  return(
+    <Select 
+      {...field}
+      options={selectOptions}
+      onBlur={(option) => field.onBlur(option.value)}
+      onChange={value => {
+        onChange(value)
+        field.onChange(value)
+      }}
+    />
+  )
+}
+
 class Form extends React.Component{
   constructor(props){
     super(props);
     this.state = { 
       suggestions: [],
       typeaheads: [],
+      filter_type: "",
       form_label: "" 
     }
   }
 
   componentDidUpdate(){
     if(!isEmpty(this.props.selectedAPIs)){
-      const apis = filter(this.props.selectedAPIs, api => api.result.enable);
+      const apis = filter(this.props.selectedAPIs, api => api.uniqueId === "adcvd_orders");
       const api = apis[0];
-      const typeaheads = this.props.typeaheads[api.pathname].typeaheads;
-
+      const typeaheads = this.props.typeaheads[api.pathname].typeaheads[this.props.values.type];
       if (isEmpty(this.state.typeaheads) && !isEmpty(typeaheads))
         this.setState({ typeaheads: typeaheads });
       if (this.state.form_label === "")
         this.setState({ form_label: api.formLabel });
     }
+  
   }
 
   getSuggestions = value => {
@@ -77,6 +100,15 @@ class Form extends React.Component{
     this.props.fields.q.onChange(suggestion);
   }
 
+  onSelectChange = (event) => {
+    const apis = filter(this.props.selectedAPIs, api => api.uniqueId === "adcvd_orders");
+    const api = apis[0];
+    const typeaheads = this.props.typeaheads[api.pathname].typeaheads[event.value];
+
+    this.props.fields.q.onChange('');
+    this.setState({ typeaheads: typeaheads });
+  }
+
   render(){
     const { fields, focused, handleSubmit } = this.props;
     const inputProps = {
@@ -91,16 +123,20 @@ class Form extends React.Component{
       <form className="mi-form" onSubmit={ handleSubmit }>
         <label className="mi-form__search-label" htmlFor="q">{this.state.form_label}</label>
         <div className="mi-form__search-row">
-        <Autosuggest
-          suggestions={this.state.suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-          onSuggestionSelected={this.onSuggestionSelected}
-          renderSuggestionsContainer={renderSuggestionsContainer}
-        />
+          <SelectField field={fields.type} onChange={this.onSelectChange} />
+        </div>
+
+        <div className="mi-form__search-row">
+          <Autosuggest
+            suggestions={this.state.suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+            onSuggestionSelected={this.onSuggestionSelected}
+            renderSuggestionsContainer={renderSuggestionsContainer}
+          />
 
         <span className="mi-form__submit">
           <button className="uk-button mi-form__submit__button" onClick={ handleSubmit } title="Search">
@@ -125,7 +161,7 @@ Form.defaultProps = {
 
 export default reduxForm({
   form: 'form',
-  fields: ['q']
+  fields: ['q', 'type']
 }, state => ({
   initialValues: state.query
 }))(Form);

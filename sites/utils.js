@@ -46,10 +46,16 @@ function createWebpackConfig({ env, site }) {
       }, {
         test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url?limit=10000&minetype=application/font-woff'
-      }, {
+      }, 
+      {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {
         test: /\.scss$/i,
         loader: ExtractTextPlugin.extract('style', 'css!sass?includePaths[]=' + bourbon)
-      }]
+      },
+      ]
     }
   };
 }
@@ -94,6 +100,10 @@ function createWebpackDevelopmentConfig({ site }) {
       }, {
         test: /\.scss$/i,
         loader: `style!css!sass?includePaths[]=${bourbon}`
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css'
       }]
     }
   };

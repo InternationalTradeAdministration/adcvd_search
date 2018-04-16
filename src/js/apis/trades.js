@@ -34,9 +34,17 @@ function transformAdcvdResponse(response) {
 }
 
 function transformAdcvdParams(params) {
+  params[params.type] = params.q;
+  delete params.q;
+
   if (params.products) {
     params.product_short_names = params.products;
     delete params.products;
+  }
+
+  if(params.hts_numbers) {
+    params.hts_numbers_raw = params.hts_numbers.replace(/\.{1}/g, '');
+    delete params.hts_numbers;
   }
   return params;
 }
@@ -82,9 +90,9 @@ module.exports = assign(
     typeaheads: ['countries', 'products', 'case_numbers', 'hts_numbers'],
     displayName: 'ADCVD Cases',
     endpoint: endpoint('v1/adcvd_orders/search'),
-    permittedParams: ['q', 'countries', 'product_short_names', 'offset'],
+    permittedParams: ['countries', 'product_short_names', 'offset', 'hts_numbers_raw', 'case_numbers'],
     transformResponse: transformAdcvdResponse,
     transformParams: transformAdcvdParams,
-    formLabel: 'Search by Country, Product, Case Number, HTS Number, or Commodity:'
+    formLabel: 'Choose a field to search by:'
   })
 );

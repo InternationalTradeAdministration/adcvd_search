@@ -140,7 +140,11 @@ function mapDispatchToProps(
     onRouted: (handle, location) => {
       if (location.action !== 'POP') return;
       const apiName = location.pathname.split('/')[2] || undefined;
-      handle({ apiName, query: location.query });
+      const query = Object.assign({}, location.query);
+      if(query.q && query.type && query.type === 'hts_numbers'){
+        query.q =`${query.q.substring(0,4)}.${query.q.substring(4,6)}.${query.q.substring(6,8)}.${query.q.substring(8,10)}`;
+      }
+      handle({ apiName, query: query });
     },
     onSelect: (api, e) => {
       e.preventDefault();

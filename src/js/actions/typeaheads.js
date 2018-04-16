@@ -48,14 +48,14 @@ export function invalidateTypeaheads(uniqueId) {
 
 function postprocess(api, _json) {
   const json = api.transformResponse ? api.transformResponse(_json) : _json;
-  let typeaheads = [];
+  let typeaheads = {};
   for (let key in json.aggregations){
     if(api.typeaheads.includes(key)){
       let values = map(json.aggregations[key], (entry) => { return entry.key });
-      typeaheads = typeaheads.concat(values);
+      typeaheads[key] = values.sort();
     }
   }
-  return typeaheads.sort();
+  return typeaheads;
 }
 
 function fetchTypeaheads(api) {

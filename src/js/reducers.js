@@ -154,7 +154,7 @@ function window(state = {}, action) {
 function typeaheads(state = {
   invalidated: false,
   isFetching: false,
-  typeaheads: [],
+  typeaheads: {},
 }, action) {
   switch (action.type) {
   case REQUEST_TYPEAHEADS:

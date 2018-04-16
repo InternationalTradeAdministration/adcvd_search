@@ -4,6 +4,7 @@ import { Route, Router } from 'react-router';
 
 import App from './app';
 import Search from './search';
+import Index from './index';
 
 const Root = ({ history, store }) => {
   return(

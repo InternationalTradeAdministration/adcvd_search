@@ -54,7 +54,6 @@ function preprocess(api, query) {
     params = api.transformParams(params);
   }
   params = permitParams(params, api.permittedParams);
-
   return params;
 }
 

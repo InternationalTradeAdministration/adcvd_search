@@ -65,7 +65,6 @@ class ADCVDOrder extends React.Component {
         <header className="mi-tpp-rates__header">
           <a href={url.replace('https://beta.trade.gov', '')}>{ country + ", " + product_short_name }</a>
         </header>
-        <a href={url.replace('https://beta.trade.gov', '')}>{url}</a>
         <p>{ case_number }</p>
       </article>
     );
