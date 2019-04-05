@@ -13,9 +13,15 @@ describe('actions/path', () => {
       selectedAPIs: [{ uniqueId: 'example' }]
     });
     const expectedActions = [
-      { avoidRouterUpdate: false,
-        type: '@@router/UPDATE_PATH',
-        path: '/search/example?q=test&countries=example' }
+      { 
+        payload: {
+          args: [
+            '/search/example?q=test&countries=example'
+          ],
+          method: 'push'
+        },
+        type: '@@router/CALL_HISTORY_METHOD',
+       }
     ];
     store.dispatch(actions.updatePath());
     expect(store.getActions()).to.eql(expectedActions);

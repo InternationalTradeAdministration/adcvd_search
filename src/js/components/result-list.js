@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const ResultList = ({ displayedItems, items, template, options }) => {
   const slicedItems = displayedItems < 0 ? items : items.slice(0, displayedItems);

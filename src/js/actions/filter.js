@@ -84,7 +84,7 @@ function computeFiltersIfNeeded(aggregation) {
 export function computeFiltersByAggregation() {
   return (dispatch, getState) => {
     const results = selectedResults(getState());
-
+    
     const aggregations = uniq(
       reduce(
         results,

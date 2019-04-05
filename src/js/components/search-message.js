@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import pluralize from 'pluralize';
+import { PropTypes } from 'prop-types';
 
 const SearchMessage = ({ apiName, keyword, total }) => {
   if (total === null) return null;

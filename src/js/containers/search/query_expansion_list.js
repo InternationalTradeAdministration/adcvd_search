@@ -1,5 +1,6 @@
 import { isEmpty, keys, map } from 'lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 class QueryExpansionTerm extends React.Component {
   constructor() {

@@ -5,22 +5,12 @@ import { expect } from 'chai';
 
 import * as actions from '../../src/js/actions';
 import { allAPIs as apis } from '../../src/js/apis';
+import * as config from '../../src/js/apis/config'
 
-const api = apis.articles;
+const uniqueId = apis.adcvd_orders.uniqueId;
+
 const payload = {
-  aggregations: {
-    countries: {},
-    industries: {}
-  },
-  metadata: {},
-  results: [1, 2, 3]
-};
-const mockStore = configureMockStore([thunk]);
-const state = {
-  filtersByAggregation: {},
-  query: { q: 1 },
-  resultsByAPI: {},
-  selectedAPIs: [api]
+  aggregations: {},
 };
 
 describe('actions/result', () => {
@@ -32,45 +22,58 @@ describe('actions/result', () => {
   it('should create an action to request results', () => {
     const expectedAction = {
       type: actions.REQUEST_RESULTS,
-      meta: api.uniqueId
+      meta: uniqueId
     };
-    expect(actions.requestResults(api.uniqueId)).to.eql(expectedAction);
+    expect(actions.requestResults(uniqueId)).to.eql(expectedAction);
   });
 
 
   it('should create an action to receive results', () => {
     const expectedAction = {
       type: actions.RECEIVE_RESULTS,
-      meta: api.uniqueId,
+      meta: uniqueId,
       payload
     };
-    expect(actions.receiveResults(api.uniqueId, payload)).to.eql(expectedAction);
+    expect(actions.receiveResults(uniqueId, payload)).to.eql(expectedAction);
   });
 
   it('should create an action to indicate failure when requesting results', () => {
     const expectedAction = {
       type: actions.FAILURE_RESULTS,
       error: true,
-      meta: api.uniqueId,
+      meta: uniqueId,
       payload
     };
-    expect(actions.failureResults(api.uniqueId, payload)).to.eql(expectedAction);
+    expect(actions.failureResults(uniqueId, payload)).to.eql(expectedAction);
   });
 
   it('create RECEIVE_RESULTS when results have been received', (done) => {
-    nock(api.endpoint)
-      .get('?q=1')
-      .reply(200, payload);
+    const mockStore = configureMockStore([thunk]);
+    const state = {
+      filtersByAggregation: {},
+      query: { q: 1 },
+      resultsByAPI: {},
+      selectedAPIs: [apis.adcvd_orders],
+      notifications: ['cool']
+    };
 
-    const expectedActions = [
-      { type: actions.REQUEST_RESULTS, meta: api.uniqueId },
-      { type: actions.RECEIVE_RESULTS, meta: api.uniqueId, payload }
-    ];
+    nock(config.trade.host)
+      .get('/v1/adcvd_orders/search?api_key='+config.trade.key)
+      .reply(200, apis);
+
     const store = mockStore(state);
 
     store.dispatch(actions.fetchResultsByAPI())
       .then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
+        expect(store.getActions().length).to.eql(2);
+
+        expect(store.getActions()[0].type).to.eql(actions.REQUEST_RESULTS);
+        expect(store.getActions()[0].meta).to.eql(uniqueId);
+        expect(store.getActions()[0].payload).to.not.exist;
+
+        expect(store.getActions()[1].type).to.eql(actions.RECEIVE_RESULTS);
+        expect(store.getActions()[1].meta).to.eql(uniqueId);
+        expect(store.getActions()[1].payload).to.exist;
       })
       .then(done)
       .catch(done);

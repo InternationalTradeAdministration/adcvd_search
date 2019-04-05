@@ -8,7 +8,7 @@ const implicit = {
 
 export const allAPIs = assign(
   {},
-  require('./trades')
+  require('./trades'),
 );
 
 export function enableAPIs(apis = { articles: true, query_expansion: true }) {
