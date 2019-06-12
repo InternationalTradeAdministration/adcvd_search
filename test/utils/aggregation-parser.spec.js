@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { parse, parseAsTree } from '../../src/js/utils/aggregation-parser';
+import { parseAsArray, parseAsTree } from '../../src/js/utils/aggregation-parser';
 
 describe('aggregation-parser', () => {
   const records = [
@@ -9,13 +9,12 @@ describe('aggregation-parser', () => {
     { key: '/Aerospace and Defense/Aviation/Aircraft and Aircraft Parts', doc_count: 1 }
   ];
 
-  describe('#parse', () => {
-    it('split by "/" and return the last element as key', () => {
-      expect(parse(records)).to.eql([
-        { key: 'Aerospace and Defense', doc_count: 1 },
-        { key: 'Aviation', doc_count: 1 },
-        { key: 'Aircraft and Aircraft Parts', doc_count: 1 }
-      ]);
+  describe('#parseAsArray', () => {
+    it('returns records as keys in an object', () => {
+      const result = parseAsArray(records);
+      expect(result["/Aerospace and Defense"]).to.exist
+      expect(result["/Aerospace and Defense/Aviation"]).to.exist
+      expect(result["/Aerospace and Defense/Aviation/Aircraft and Aircraft Parts"]).to.exist
     });
   });
 

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import Message from '../../components/search-message';
 import ResultList from '../../components/result-list';

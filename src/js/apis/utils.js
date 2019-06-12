@@ -11,13 +11,6 @@ function createAnyTypeChecker() {
 }
 
 function createObjectTypeChecker(structure) {
-  /*
-   const structure = {
-     header: createTypeChecker('string'),
-     mode: createTypeChecker('string'),
-     footer: createTypeChecker('string')
-   }
-   */
   return (key, attrName, object) => {
     forEach(object, (value, objectKey) => {
       invariant(

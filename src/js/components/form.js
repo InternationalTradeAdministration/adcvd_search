@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
-import { filter, isEmpty, reduce } from 'lodash';
-import { reduxForm, getValues } from 'redux-form';
+import React from 'react';
+import { filter, isEmpty } from 'lodash';
+import { reduxForm } from 'redux-form';
 import Autosuggest from 'react-autosuggest';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { PropTypes } from 'prop-types';
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the

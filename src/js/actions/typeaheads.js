@@ -1,13 +1,11 @@
-import assign from 'object-assign';
-import { get, isEmpty, map } from 'lodash';
+import { map } from 'lodash';
 import fetch from 'isomorphic-fetch';
 import invariant from 'invariant';
 import { batchActions } from 'redux-batched-actions';
 
 import {
-  formatAggregations, formatEndpoint, formatMetadata, formatParams, permitParams
+  formatEndpoint
 } from '../utils/action-helper';
-import { computeFiltersByAggregation } from './filter';
 import { notify } from './notification';
 
 export const REQUEST_TYPEAHEADS = 'REQUEST_TYPEAHEADS';
@@ -49,8 +47,8 @@ export function invalidateTypeaheads(uniqueId) {
 function postprocess(api, _json) {
   const json = api.transformResponse ? api.transformResponse(_json) : _json;
   let typeaheads = {};
-  for (let key in json.aggregations){
-    if(api.typeaheads.includes(key)){
+  for (let key in json.aggregations) {
+    if (api.typeaheads.includes(key)) {
       let values = map(json.aggregations[key], (entry) => { return entry.key });
       typeaheads[key] = values.sort();
     }
@@ -61,7 +59,7 @@ function postprocess(api, _json) {
 function fetchTypeaheads(api) {
   return (dispatch, getState) => {
     dispatch(requestTypeaheads(api.uniqueId));
-    const params = {size: 1};
+    const params = { size: 1 };
     return fetch(formatEndpoint(api.endpoint, params))
       .then(response => {
         invariant(response.status === 200, response.statusText);
@@ -85,7 +83,7 @@ export function fetchTypeaheadsByAPI() {
 
     return Promise.all(
       map(selectedAPIs, (api) => {
-        if(api.typeaheads){
+        if (api.typeaheads) {
           dispatch(fetchTypeaheads(api))
         }
       })

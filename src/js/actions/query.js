@@ -1,6 +1,5 @@
 import assign from 'object-assign';
 import { intersection, isEmpty, keys, omit } from 'lodash';
-
 import { invalidateAllFilters, invalidateSiblingFilters } from './filter';
 
 export const UPDATE_QUERY = 'UPDATE_QUERY';

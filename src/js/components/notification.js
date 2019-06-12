@@ -1,5 +1,6 @@
 import { map } from 'lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const Notification = ({ notifications, onDismiss }) => {
   if (Object.keys(notifications).length === 0) return null;

@@ -1,5 +1,6 @@
 import { map, startCase } from 'lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import CheckboxTree from '../../components/checkbox-tree';
 

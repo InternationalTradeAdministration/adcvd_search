@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router';
+import { PropTypes } from 'prop-types';
 
 import App from './app';
 import Search from './search';
-import Index from './index';
 
 const Root = ({ history, store }) => {
   return(

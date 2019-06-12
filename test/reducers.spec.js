@@ -12,10 +12,10 @@ describe('reducer', () => {
       query: { q: '' },
       resultsByAPI: {},
       routing: {
-        changeId: 1,
-        path: 'blank'
+        locationBeforeTransitions: null
       },
       selectedAPIs: [],
+      typeaheadsByAPI: {},
       window: {}
     });
   });
@@ -27,6 +27,7 @@ describe('reducer', () => {
         meta: 'countries'
       }).filtersByAggregation).to.eql({
         countries: {
+          displayName: "",
           invalidated: false,
           items: {}
         }
@@ -40,6 +41,7 @@ describe('reducer', () => {
         payload: { a: {}, b: {}, c: {} }
       }).filtersByAggregation).to.eql({
         countries: {
+          displayName: "",
           invalidated: false,
           items: { a: {}, b: {}, c: {} }
         }
@@ -52,6 +54,7 @@ describe('reducer', () => {
         meta: 'countries'
       }).filtersByAggregation).to.eql({
         countries: {
+          displayName: "",
           invalidated: true,
           items: {}
         }

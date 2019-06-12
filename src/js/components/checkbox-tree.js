@@ -1,5 +1,6 @@
 import { difference, includes, isEmpty, keys, map, pick, take } from 'lodash';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const Checkbox = ({ checked, children, disabled, item }) => (
   <li role="treeitem" className="mi-checkbox-tree__list__item" key={ item }>
