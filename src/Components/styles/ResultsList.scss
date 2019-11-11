@@ -1,0 +1,31 @@
+.ResultsList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+
+  p.searchMessage {
+    margin-top: 1em;
+    padding-left: 1em;
+    .searchMessageKeyword {
+      color: #7c0708;
+    }
+  }
+
+  .anItem {
+    text-align: left;
+    margin: 0.5em 0 0.5em 1em;
+    padding:  1em 0   0   1em;
+    line-height: 0.95em;
+
+    &:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a {
+      color: #226daf;
+      font-size: 14pt;
+      line-height: 1.15em;
+    }
+  }
+  
+}

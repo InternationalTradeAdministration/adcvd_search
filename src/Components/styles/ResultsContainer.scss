@@ -1,0 +1,35 @@
+.ResultsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 1em;
+
+  .pagination {
+    flex-basis: 100%;
+    width: 20px;
+    line-height: 2em;
+
+    li {
+      display: inline-block;
+      list-style-type: none;
+
+      &.active {
+        background-color: #337ab7;
+        a {
+          color: white;
+          text-decoration: none;
+        }
+      }
+      
+      a {
+        position: relative;
+        padding: 6px 12px;
+        color: #337ab7;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        margin: 0 0 0 -1px;
+      }
+    }
+  }
+}
