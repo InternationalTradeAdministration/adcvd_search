@@ -1,47 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>AD/CVD Search App</title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400&subset=latin,latin-ext">
-
-    <style type="text/css">
-     body {
-       font-family: 'Lato', san-serif;
-       padding-top: 4em;
-       text-align: center;
-     }
-     header {
-       font-size: 45px;
-       margin: 0 auto;
-       width: 530px;
-     }
-     .wrapper {
-       margin: 20px auto;
-       text-align: center;
-       width: 500px;
-     }
-     table {
-       width: 100%;
-       text-align: left;
-     }
-     td {
-       padding: 10px 0;
-     }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ADCVD Search Interface"
+    />
+    <title>ADCVD Search</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var divID = 'searchContainer';
+        window.Explorer.renderAdcvdSearch(divID);
+      });
+    </script>
   </head>
   <body>
-    <header>AD/CVD Search</header>
-    <div class="wrapper">
-      <table>
-        <tbody>
-          <tr>
-            <td><a class="staging" href="adcvd/staging">Staging</a></td>
-            <td>
-              <a class="production" href="adcvd/production">Production</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div id="searchContainer"></div>
   </body>
 </html>
