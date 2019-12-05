@@ -1,4 +1,4 @@
-.App {
+#searchContainer .App {
   text-align: center;
   align-items: center;
   display: flex;
@@ -11,6 +11,8 @@
     padding: 1em 0 1em 0;
   
     input {
+      display: initial;
+      max-width: 25vw;
       height: 44px;
       font-size: 1em;
       padding: 0 8px;
@@ -19,6 +21,7 @@
       border-radius: 5px;
     }
     button {
+      display: initial;
       background-color: #015ba7;
       border: none;
       border-radius: 5px;

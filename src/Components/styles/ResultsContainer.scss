@@ -1,8 +1,8 @@
-.ResultsContainer {
+#searchContainer .ResultsContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: 1em;
 
   .pagination {
@@ -13,6 +13,7 @@
     li {
       display: inline-block;
       list-style-type: none;
+      line-height: inherit;
 
       &.active {
         background-color: #337ab7;

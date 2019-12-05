@@ -7,7 +7,7 @@ jest.setTimeout(30000);
 let browser;
 let page;
 const baseAppUrl = 'http://localhost:3000';
-const baseApiUrl = 'https://api.govwizely.com/v1/adcvd_orders/search';
+const baseApiUrl = 'https://api.trade.gov/v1/adcvd_orders/search';
 
 beforeAll(async () => {
   browser = await puppeteer.launch({
@@ -54,7 +54,7 @@ test('can enter a search term and get results', async () => {
   const searchMessageElement = '#searchContainer > div > div > div > div.ResultsList > p';
   await page.waitForSelector(searchMessageElement, 10000);
   const searchMessageText = await page.$eval(searchMessageElement, e => e.innerText);
-  expect(searchMessageText).toBe('22 results from the ADCVD Cases were found for paper.');
+  expect(searchMessageText).toBe('22 results from ADCVD Cases were found for paper.');
 });
 
 afterAll(() => browser.close());

@@ -1,7 +1,9 @@
-.ResultsList {
+#searchContainer .ResultsList {
   display: flex;
   flex-direction: column;
   margin-top: 1em;
+  min-width: 50px;
+  max-width: 75vw;
 
   p.searchMessage {
     margin-top: 1em;
