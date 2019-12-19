@@ -6,7 +6,7 @@
     "runtime-main.js": "./static/js/adcvd_search.js",
     "runtime-main.js.map": "./static/js/adcvd_search.js.map",
     "index.html": "./index.html",
-    "precache-manifest.be741748184bc1420032baff4c7007e2.js": "./precache-manifest.be741748184bc1420032baff4c7007e2.js",
+    "precache-manifest.612455a38075be39cad4fe0ad0f5e7d1.js": "./precache-manifest.612455a38075be39cad4fe0ad0f5e7d1.js",
     "service-worker.js": "./service-worker.js",
     "static/css/0.adcvd_search.css.map": "./static/css/0.adcvd_search.css.map"
   },
