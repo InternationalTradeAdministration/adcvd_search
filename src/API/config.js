@@ -1,26 +1,12 @@
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'test') {
   module.exports = {
-    url: "https://api.trade.gov/v1/adcvd_orders/search",
-    apiKey: "hSLqwdFz1U25N3ZrWpLB-Ld4",
-  }
-} else if (process.env.NODE_ENV === 'staging') {
-  module.exports = {
-    url: "https://api.govwizely.com/v1/adcvd_orders/search",
-    apiKey: "Z48wSr3E3nNN4itDUvE4Clje",
-  }
-} else if (process.env.NODE_ENV === 'test'){
-  module.exports = {
-    /* move the json file to /public first */
+    /* move the json file to `/public` first */
     url: "./adcvd_orders-paper.json",
-    apiKey: "test",  
+    accessToken: "test",  
   }
 } else {
   module.exports = {
-    // url: "https://api.govwizely.com/v1/adcvd_orders/search",
-    // apiKey: "Z48wSr3E3nNN4itDUvE4Clje",
-    url: "https://api.trade.gov/v1/adcvd_orders/search",
-    apiKey: "hSLqwdFz1U25N3ZrWpLB-Ld4",
-    // url: "./adcvd_orders-paper.json",
-    // apiKey: "test",  
+    url: "https://api.trade.gov/gateway/v1/adcvd_orders/search",
+    accessToken: "b0045391-2ef8-3049-a215-f78b7716f045",  
   }
 }
