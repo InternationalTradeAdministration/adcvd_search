@@ -9,7 +9,7 @@ const ResultsList = (props) => {
 
   return(
     <div className="ResultsList">
-      <p className="searchMessage"><strong className="searchMessageKeyword">{props.total}</strong> results from the ADCVD Cases were found for <strong className="searchMessageKeyword">{props.searchQuery}.</strong></p>
+      <p className="searchMessage"><strong className="searchMessageKeyword">{props.total}</strong> results from ADCVD Cases were found for <strong className="searchMessageKeyword">{props.searchQuery}.</strong></p>
 
       { props.results.map(item => {
         return (
