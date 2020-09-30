@@ -6,7 +6,9 @@ export const clearFilters = (searchQuery) => {
   document.querySelectorAll('input[type=checkbox]').forEach( el => el.checked = false );
   return (dispatch) => {
     dispatch({ type: actionTypes.CLEAR_FILTERS });
-    return fetch(`${config.url}?q=${searchQuery}&api_key=${config.apiKey}&size=10&offset=0`)
+    return fetch(`${config.url}?q=${searchQuery}&size=10&offset=0`, {
+      headers: { 'Authorization': 'Bearer ' + config.accessToken }
+    })
     .then(response => response.json())
     .then(response => dispatch({ 
       type: actionTypes.FETCH_NEW_QUERY, 
@@ -27,7 +29,9 @@ export const toggleFilter = (event, searchQuery) => {
 
     let params = paramGenerator(getState);
 
-    return fetch(`${config.url}?q=${searchQuery}&api_key=${config.apiKey}${params}&size=10&offset=0`)
+    return fetch(`${config.url}?q=${searchQuery}${params}&size=10&offset=0`, {
+      headers: { 'Authorization': 'Bearer ' + config.accessToken }
+    })
       .then(response => response.json())
       .then(response => dispatch(updateAggregations(response, name, value)));  
   }
@@ -59,7 +63,9 @@ export const fetchNewQuery = (searchQuery, activePage=1) => {
     dispatch({ type: actionTypes.SET_SEARCH_QUERY, searchQuery: searchQuery })
     dispatch({ type: actionTypes.LOADING_RESULTS });
     dispatch({ type: actionTypes.CLEAR_FILTERS });
-    return fetch(`${config.url}?q=${searchQuery}&api_key=${config.apiKey}&size=10&offset=${(activePage-1)*10}`)
+    return fetch(`${config.url}?q=${searchQuery}&size=10&offset=${(activePage-1)*10}`, {
+      headers: { 'Authorization': 'Bearer ' + config.accessToken }
+    })
       .then(response => response.json())
       .then(response => dispatch({ 
         type: actionTypes.FETCH_NEW_QUERY, 
@@ -74,7 +80,9 @@ export const fetchNewPage = (searchQuery, pageNumber) => {
 
     let params = paramGenerator(getState);
     
-    return fetch(`${config.url}?q=${searchQuery}&api_key=${config.apiKey}${params}&size=10&offset=${(pageNumber-1)*10}`)
+    return fetch(`${config.url}?q=${searchQuery}${params}&size=10&offset=${(pageNumber-1)*10}`, {
+      headers: { 'Authorization': 'Bearer ' + config.accessToken }
+    })
       .then(response => response.json())
       .then(response => dispatch({ 
         type: actionTypes.FETCH_NEW_PAGE, 
