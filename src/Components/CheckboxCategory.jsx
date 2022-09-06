@@ -43,31 +43,32 @@ class CheckboxCategory extends Component {
   handleToggleFilter(event) {
     this.props.toggleFilter(event, this.props.resultState.searchQuery)
   }
-  
-  isChecked(item) {
-    if (this.props.appliedFilters[this.props.category].includes(item["key"])) {
+
+  isChecked(value) {
+    if (this.props.appliedFilters[this.props.category].includes(value)) {
       return true
     } else { return false }
   }
 
   render() {
+    const itemArray = this.props.items.sort((a, b) => a["value"] > b["value"] ? 1 : -1);
     return (
       <details className="FilterCategory" open>
       <summary>{filterTitles[this.props.category]}</summary>
 
-      { ((this.props.items.length > this.props.limit) && (!this.state.showAll)) ? (
-        this.props.items.sort((a, b) => a["key"] > b["key"] ? 1 : -1).slice(0, this.props.limit).map((item, i) => {
+      { ((itemArray.length > this.props.limit) && (!this.state.showAll)) ? (
+        itemArray.slice(0, this.props.limit).map((item, i) => {
           return (
-            <label key={i}>
-              <input type="checkbox" name={this.props.category} value={item["key"]} key={i} onChange={(event) => this.handleToggleFilter(event)} checked={this.isChecked(item)}/> {item["key"]}: {item["doc_count"]}
+            <label key={item["value"]}>
+              <input type="checkbox" name={this.props.category} value={item["value"]} key={item["value"]} onChange={(event) => this.handleToggleFilter(event)} checked={this.isChecked(item["value"])}/> {item["value"]}: {item["count"]}
             </label>
           )
         })
       ) : (
-        this.props.items.sort((a, b) => a["key"] > b["key"] ? 1 : -1).map((item, i) => {
+        itemArray.map((item, i) => {
           return (
-            <label key={i}>
-              <input type="checkbox" name={this.props.category} value={item["key"]} key={i} onChange={(event) => this.handleToggleFilter(event)} checked={this.isChecked(item)}/> {item["key"]}: {item["doc_count"]}
+            <label key={item["value"]}>
+              <input type="checkbox" name={this.props.category} value={item["value"]} key={item["value"]} onChange={(event) => this.handleToggleFilter(event)} checked={this.isChecked(item["value"])}/> {item["value"]}: {item["count"]}
             </label>
           )
         })

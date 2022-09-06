@@ -12,10 +12,10 @@ function FiltersContainer(props) {
     let categories = []
       Object.entries(props.aggregations).forEach(
         ([key, value]) => categories.push(key)
-      )    
+      )
     return categories
   }
-  
+
   // const getQuery = () => props.location.search.substring(1);
 
   function handleClearFilters() {
@@ -25,11 +25,11 @@ function FiltersContainer(props) {
   function filterCategories() {
     return (
       listCategories().map((cat, i) => {
-        return (<CheckboxCategory category={cat} key={i} items={props.aggregations[cat]} limit={5}/>)
-      })  
+        return (<CheckboxCategory category={cat} key={cat} items={props.aggregations[cat]} limit={5}/>)
+      })
     )
   }
-  
+
   return(
     <div className="FiltersContainer">
       { (props.aggregations !== {}) ? (

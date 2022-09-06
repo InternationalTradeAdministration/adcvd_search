@@ -4,14 +4,9 @@ export function paramGenerator(getState) {
     Object.entries(getState().appliedFilters).forEach(
       ([key, value]) => {
         if (getState().appliedFilters[key].length > 0) {
-          if (key === 'products') {
-            /* replace commas within the item with spaces, then add it to the list separated by commas */
-            params += `&sanitized_products=${getState().appliedFilters[key].map(item => item.replace(commaRegex, '%20'))}`
-          }
-          if (key !== 'products') {
-            /* just add it to the list as-is */
-            params += `&${key}=${getState().appliedFilters[key].map(item => item)}`
-          }
+          const parameterDelimiter  = PIPE_DELIMITED_FILTERS.includes(key) ? '|' : ','
+          let parameterValue = getState().appliedFilters[key].join(parameterDelimiter)
+          params += `&${key}=${encodeURIComponent(parameterValue)}`
         }
       }
     )
@@ -19,4 +14,8 @@ export function paramGenerator(getState) {
   return params;
 }
 
-const commaRegex = /,/g;
+const PIPE_DELIMITED_FILTERS = [
+    'commodities',
+    'countries',
+    'products'
+]

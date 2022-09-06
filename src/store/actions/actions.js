@@ -6,12 +6,10 @@ export const clearFilters = (searchQuery) => {
   document.querySelectorAll('input[type=checkbox]').forEach( el => el.checked = false );
   return (dispatch) => {
     dispatch({ type: actionTypes.CLEAR_FILTERS });
-    return fetch(`${config.url}?q=${searchQuery}&size=10&offset=0`, {
-      headers: { 'Authorization': 'Bearer ' + config.accessToken }
-    })
+    return fetchWithQuery(`${config.url}?q=${searchQuery}&size=10&offset=0`)
     .then(response => response.json())
-    .then(response => dispatch({ 
-      type: actionTypes.FETCH_NEW_QUERY, 
+    .then(response => dispatch({
+      type: actionTypes.FETCH_NEW_QUERY,
       response: response,
     }));
   }
@@ -22,18 +20,16 @@ export const toggleFilter = (event, searchQuery) => {
   return (dispatch, getState) => {
     dispatch({
       type: actionTypes.TOGGLE_FILTER,
-      name: event.target.name, 
-      value: event.target.value  
+      name: event.target.name,
+      value: event.target.value
     });
     dispatch({ type: actionTypes.LOADING_RESULTS })
 
     let params = paramGenerator(getState);
 
-    return fetch(`${config.url}?q=${searchQuery}${params}&size=10&offset=0`, {
-      headers: { 'Authorization': 'Bearer ' + config.accessToken }
-    })
+    return fetchWithQuery(`${config.url}?q=${searchQuery}${params}&size=10&offset=0`)
       .then(response => response.json())
-      .then(response => dispatch(updateAggregations(response, name, value)));  
+      .then(response => dispatch(updateAggregations(response, name, value)));
   }
 }
 
@@ -49,7 +45,7 @@ export const updateAggregations = (response, category, value) => {
       }
     )
     dispatch({ type: actionTypes.FETCH_WITH_FILTERS, response: response });
-    
+
     aggsToUpdate.forEach(agg => {
       dispatch({ type: actionTypes.UPDATE_SOME_AGGREGATIONS, aggregations: response.aggregations, aggregation: agg });
     })
@@ -58,17 +54,15 @@ export const updateAggregations = (response, category, value) => {
 
 export const fetchNewQuery = (searchQuery, activePage=1) => {
   document.querySelectorAll('input[type=checkbox]').forEach( el => el.checked = false );
-  
+
   return (dispatch) => {
     dispatch({ type: actionTypes.SET_SEARCH_QUERY, searchQuery: searchQuery })
     dispatch({ type: actionTypes.LOADING_RESULTS });
     dispatch({ type: actionTypes.CLEAR_FILTERS });
-    return fetch(`${config.url}?q=${searchQuery}&size=10&offset=${(activePage-1)*10}`, {
-      headers: { 'Authorization': 'Bearer ' + config.accessToken }
-    })
+    return fetchWithQuery(`${config.url}?q=${searchQuery}&size=10&offset=${(activePage-1)*10}`)
       .then(response => response.json())
-      .then(response => dispatch({ 
-        type: actionTypes.FETCH_NEW_QUERY, 
+      .then(response => dispatch({
+        type: actionTypes.FETCH_NEW_QUERY,
         response: response,
       }));
   }
@@ -79,14 +73,21 @@ export const fetchNewPage = (searchQuery, pageNumber) => {
     dispatch({ type: actionTypes.UPDATE_PAGE_NUMBER, pageNumber: pageNumber });
 
     let params = paramGenerator(getState);
-    
-    return fetch(`${config.url}?q=${searchQuery}${params}&size=10&offset=${(pageNumber-1)*10}`, {
-      headers: { 'Authorization': 'Bearer ' + config.accessToken }
-    })
+
+    return fetchWithQuery(`${config.url}?q=${searchQuery}${params}&size=10&offset=${(pageNumber-1)*10}`)
       .then(response => response.json())
-      .then(response => dispatch({ 
-        type: actionTypes.FETCH_NEW_PAGE, 
+      .then(response => dispatch({
+        type: actionTypes.FETCH_NEW_PAGE,
         response: response,
       }));
   }
+}
+
+export const fetchWithQuery = (query) => {
+  return fetch(query, {
+    headers: {
+      'subscription-key': config.accessToken,
+      'Cache-Control': 'no-cache'
+    }
+  })
 }
